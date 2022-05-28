@@ -52,3 +52,102 @@ def minMaxAvg(input):
     return [min, max, avg]
 
 print(minMaxAvg([1,2,3,4]))
+
+#write a function that given a list of buildings heights in a row ex. [1,4,2,3,5], return a list of visable building when viewed from the front. heights([1,4,2,3,5]) would return [1,4,5]
+
+from ast import Import
+import math
+
+
+def heights(list):
+    new_list = []
+    x = 0
+    for i in list:
+        if i > x:
+            new_list.append(i)
+            x = i
+    return new_list
+
+print(heights([1,4,2,3,5]))
+
+#write a function that given a number, returns whether or not that number has a whole intager square root. rootFinder(64) should return true while rootFinder(7) should return false 
+def rootFinder(num):
+    i = 1
+    while i * i < num:
+        i+=1
+    if i * i == num:
+        return True
+    return False
+
+#same but with built in
+import math
+
+def rootFinder(num):
+    return int(math.sqrt(num))
+
+print(rootFinder(64))
+print(rootFinder(7))
+
+
+# Write a function that given an amount of cents returns the fewest number of quarters, dimes, nickels, and pennies required to equal that amount.
+#         coinCalculator(99) should return {"Quarters":3,"Dimes":2,"Nickels":0,"Pennies":4}
+#     Bonus:
+#         Account for Dollar increments as well (Ones/Fives/Tens/Twenties/Fifties/Hundreds)
+#     Double Bonus:
+#         Account for the elusive 2 dollar bills as well.
+
+def coinCalculator(num):
+    change = {
+        "quarters" : 0,
+        "dime" : 0,
+        "nickles" : 0,
+        "pennies" : 0,
+    }
+    dollars = {
+        "hundreds": 0,
+        "fifties": 0,
+        "twenties": 0,
+        "tens": 0,
+        "fives": 0,
+        "twos": 0,
+        "ones": 0,
+    }
+    while num !=0:
+        if num >= 25:
+            change["quarters"] +=1
+            num -= 25
+        elif num >= 10:
+            change["dime"] +=1
+            num -= 10
+        elif num >= 5:
+            change["nickles"] +=1
+            num -= 5
+        else:
+            change["pennies"] +=1
+            num -=1
+    while change["quarters"] < 3:
+        if change["quarters"] >= 400:
+            dollars["hundreds"] +=1
+            change["quarters"] -= 400
+        elif change["quarters"] >= 200:
+            dollars["fifties"] += 1
+            change["quarters"] -= 200
+        elif change["quarters"] >= 80:
+            dollars["twenties"] += 1
+            change["quarters"] -= 80
+        elif change["quarters"] >= 40:
+            dollars["tens"] += 1
+            change["quarters"] -= 40
+        elif change["quarters"] >= 20:
+            dollars["fives"] += 1
+            change["quarters"] -= 20
+        elif change["quarters"] >= 8:
+            dollars["twos"] += 1
+            change["quarters"] -= 8
+        elif change["quarters"]>= 4:
+            dollars["ones"] += 1
+            change["quarters"] -=4
+
+    return dollars, change
+
+print(coinCalculator(99999999999))
