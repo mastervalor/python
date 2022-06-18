@@ -151,3 +151,66 @@ def coinCalculator(num):
     return dollars, change
 
 print(coinCalculator(99999999999))
+
+# Threes and Fives
+#         Write a function threesFives() that adds each value from 100 and 4000000 (inclusive) if that value is evenly divisible by 3 or 5 but not both.
+#         display the final sum in the console
+
+#     Sum to One Digit
+#         Write a function sumToOne(num) that given a number sums that number's digits repeatedly until the sum is only one digit. return that final one digit results.
+#         sumToOne(18) would return 9
+#         sumToOne(923) would return 5
+
+def threesFives():
+    sum = 0 
+    for i in range (100,4000001, 1):
+        if (i % 3 == 0 or i % 5 == 0) and not i % 15 == 0:
+            sum += i
+    print(sum)
+
+threesFives()
+
+
+def sumToOne(num):
+    num = str(num)
+    for x in range(0,len(num)-1,1):
+        if int(num[x]) + int(num[x+1]) < 10:
+            return int(num[x]) + int(num[x+1])
+
+print(sumToOne(917))
+
+# create a function that given a string, returns the integer made from the string's digits. Given "0s1a3y5w7h9a2t4", 
+# the function should return the number 1357924
+
+def given_string(name):
+    num = ""
+    for i in range(len(name)):
+        if (i % 2 ==0) & (i > 0):
+            num += name[i]
+    return num
+print(given_string('0s1a3y5w7h9a2t4'))
+
+
+def intExtraction(num):
+    numbers = 0
+    for i in range(len(num)):
+        numbers = 
+
+# create function clockHandAngles(seconds) that, given the number of seconds since 12:00:00,
+# will print the angles ( in degress ) of the hour, minute and second hands. As a quick review, 
+# there are 360 degrees in a full arc rotation. Treat "stright-up" 12:00:00 as 0 degress for all hands
+
+def clockHandAngles(seconds):
+    hours = 0 
+    minutes = 0
+    second = 0
+    while seconds > 0:
+        if seconds > 3600:
+            hours += 1
+            seconds -= 3600
+        elif seconds > 60:
+            minutes += 1
+            seconds -= 60
+    return f"{hours} and {minutes}"
+
+print(clockHandAngles(3660))
