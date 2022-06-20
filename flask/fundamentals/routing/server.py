@@ -14,7 +14,7 @@ def word(word):
 
 @app.route('/repeat/<int:mult>/<string:words>')
 def mult(words, mult):
-    return words * mult
+    return f' {words}' * mult
 
 if __name__=="__main__":
     app.run(debug=True)
