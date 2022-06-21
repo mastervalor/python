@@ -24,4 +24,3 @@ def colors(x, y, tile1, tile2):
 
 if __name__=="__main__":
     app.run(debug=True)
-    

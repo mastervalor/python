@@ -201,16 +201,22 @@ def intExtraction(num):
 # there are 360 degrees in a full arc rotation. Treat "stright-up" 12:00:00 as 0 degress for all hands
 
 def clockHandAngles(seconds):
-    hours = 0 
+    hours = 0
     minutes = 0
     second = 0
     while seconds > 0:
-        if seconds > 3600:
+        if seconds >= 3600:
             hours += 1
             seconds -= 3600
-        elif seconds > 60:
+        elif seconds >= 60:
             minutes += 1
             seconds -= 60
-    return f"{hours} and {minutes}"
+        elif seconds <= 59:
+            second += 1
+            seconds -= 1
+        hourDegree = (360/12) * hours
+        minuteDegree = (360/60) * minutes
+        secondDegree = (360/60) * second
+    return f"The hands in degrees hours: {hourDegree} and minutes: {minuteDegree} and seconds: {secondDegree}"
 
-print(clockHandAngles(3660))
+print(clockHandAngles(3674))
