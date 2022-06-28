@@ -56,6 +56,7 @@ print(minMaxAvg([1,2,3,4]))
 #write a function that given a list of buildings heights in a row ex. [1,4,2,3,5], return a list of visable building when viewed from the front. heights([1,4,2,3,5]) would return [1,4,5]
 
 from ast import Import
+from fileinput import close
 import math
 
 
@@ -191,10 +192,10 @@ def given_string(name):
 print(given_string('0s1a3y5w7h9a2t4'))
 
 
-def intExtraction(num):
-    numbers = 0
-    for i in range(len(num)):
-        numbers = 
+# def intExtraction(num):
+#     numbers = 0
+#     for i in range(len(num)):
+#         numbers = 
 
 # create function clockHandAngles(seconds) that, given the number of seconds since 12:00:00,
 # will print the angles ( in degress ) of the hour, minute and second hands. As a quick review, 
@@ -219,4 +220,49 @@ def clockHandAngles(seconds):
         secondDegree = (360/60) * second
     return f"The hands in degrees hours: {hourDegree} and minutes: {minuteDegree} and seconds: {secondDegree}"
 
+def clockHandAngles2(seconds):
+    # there is 3600 second in and hour, for a full rotation multiply by 12 to get 43200 seconds
+    # take the % of seconds by how many seconds in each rotation to break down for that number for that hand
+    #finally multiply at the end wby how man degrees the hand moves for each number on the clock
+    hours_hand = (seconds%43200)/3600 * 30
+    minutes_hand = (seconds%3600)/60 * 6
+    seconds_hand = (seconds%60)*6
+    return f"The hands in degrees hours: {hours_hand} and minutes: {minutes_hand} and seconds: {seconds_hand}"
+
+
+
 print(clockHandAngles(3674))
+
+
+# - create a function that, given an input string, returns a boolean whether parenteses in that string are valid. given input "y(3(p)p(3)r)s", returns true.
+#         given "n(0(p)3", return false. given "n)0(t(0)k", return false
+
+def closes(line):
+    closes = 0
+    opens = 0
+    for i in line:
+        if i == "(":
+            opens += 1
+        elif i == ")" and opens != 0:
+            closes += 1
+    if opens == closes:
+        return True
+    else:
+        return False
+    
+def inValid(input):
+    diff = 0
+    for i in input:
+        if i == "(":
+            diff += 1
+        elif i == ")":
+            diff -= 1
+            if diff < 0:
+                return False
+    if diff == 0:
+        return True
+    return False
+    
+print(closes("n)0(t(0)k"))
+print(closes("y(3(p)p(3)r)s"))
+print(closes("n(0(p)3"))

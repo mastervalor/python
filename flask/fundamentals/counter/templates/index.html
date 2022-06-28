@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+    crossorigin="anonymous">
+    <title>counter</title>
+</head>
+<body>
+    <H1 class="bg-primary text-light text-center col-3 my-5 mx-auto">Counter</H1>
+    <p class="text-center col-3 my-5 mx-auto">{{session['count']}} time(s)</p>
+    <p class="text-center col-3 my-5 mx-auto">The total: {{session['total']}} time(s)</p>
+    <div class="col-3 d-flex justify-content-between mx-auto">
+        <a href="/" class="btn btn-primary">Click</a>
+        <a href="/double" class="btn btn-primary"> +2 </a>
+        <a href="/reset" class="btn btn-danger">Reset</a>
+    </div>
+    <form action="/increment" method="post">
+        <div class="col-3 d-flex justify-content-between mx-auto">
+            <label for="increment">How much would you like to increment by?</label>
+            <input type="text" name="increment" id="increment">
+            <button class="btn btn-primary btn-lg btn-block">enter</button>
+        </div>
+    </form>
+</body>
+</html>
