@@ -266,3 +266,35 @@ def inValid(input):
 print(closes("n)0(t(0)k"))
 print(closes("y(3(p)p(3)r)s"))
 print(closes("n(0(p)3"))
+
+# write a function given a 12 hour AM/PM format, ('1:01:00PM), returns time converted to military time, (13:01:00)
+# example timeconvert('01:45:00PM') returns '13:45:00'
+# example 2 timeconvert('12:59:00AM') returns '00:59:00'
+def timeconvert(time):
+    h = time.split(':')
+    if time[-2] == 'P':
+        h[0] = str(int(h[0]) + 12)
+        h[-1] = h[-1][:2]
+    elif h[0] == '12':
+        h[0] = '00'
+        h[-1] = h[-1][:2]
+    else:
+        h[-1] = h[-1][:2]
+    return ':'.join(h)
+
+
+
+print(timeconvert('01:45:45PM'))
+print(timeconvert('12:59:00AM'))
+
+def timeconvert(time):
+    hour = 0
+    if time[len(time)-2:] == "PM":
+        if time[:2] == "12":
+            hour == '12'
+        else:
+            hour = int(time[:2]) + 12
+    else:
+        if time[:2] != "12":
+            hour = time[:2]
+    return f'{hour}{time[2:8]}'

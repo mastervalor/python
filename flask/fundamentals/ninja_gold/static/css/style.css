@@ -7,4 +7,5 @@
 }
 #activites{
     min-height: 10vw;
+    overflow: auto;
 }
