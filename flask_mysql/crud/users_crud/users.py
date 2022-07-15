@@ -1,3 +1,4 @@
+from unittest import result
 from mysqlconnection import connectToMySQL
 
 class users:
@@ -7,9 +8,15 @@ class users:
         self.last_name = data ['last_name']
         self.email = data['email']
         self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
     @classmethod
     def save(cls,data):
         query = "INSERT INTO users(first_name, last_name, email) VALUES ( %(fname)s, %(lname)s, %(email)s);"
+        return connectToMySQL('users').query_db( query, data)
+    
+    @classmethod
+    def updated(cls,data):
+        query = "update users set first_name=%(fname)s, last_name=%(lname)s, email=%(email)s where id = %(id)s"
         return connectToMySQL('users').query_db( query, data)
 
     @classmethod
@@ -20,3 +27,15 @@ class users:
         for user in results:
             users.append(cls(user))
         return users
+    
+    @classmethod
+    def get_one(cls, user_id):
+        query = "SELECT * from users where id = %(id)s"
+        results = connectToMySQL('users').query_db(query, user_id)
+        return cls(results[0])
+    
+    @classmethod
+    def delete(cls,user_id):
+        query = "DELETE FROM users WHERE id = %(id)s;"
+        retults = connectToMySQL('users').query_db(query, user_id)
+        print(retults)

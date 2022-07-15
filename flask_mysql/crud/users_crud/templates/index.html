@@ -18,6 +18,7 @@
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Created At</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,11 +28,12 @@
                     <td>{{one_user.first_name}} {{one_user.last_name}} </td>
                     <td>{{one_user.email}}</td>
                     <td> {{one_user.created_at}} </td>
+                    <td><a href="/user/show/{{one_user.id}}">Show</a> | <a href="/user/edit/{{one_user.id}}">Edit</a> | <a href="/user/delete/{{one_user.id}}">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a href="/new">Add a User</a>
+        <a href="/user/new">Add a User</a>
     </div>
 </body>
 </html>
