@@ -1,7 +1,5 @@
 # a cursor is the object we use to interact with the database
 import pymysql.cursors
-import sys
-sys.path.append("/Users/mouradmarzouk/python/flask_mysql")
 from password import password
 # this class will give us an instance of a connection to our database
 class MySQLConnection:
@@ -41,4 +39,3 @@ class MySQLConnection:
 # connectToMySQL receives the database we're using and uses it to create an instance of MySQLConnection
 def connectToMySQL(db):
     return MySQLConnection(db)
-
