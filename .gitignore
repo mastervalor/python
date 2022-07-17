@@ -1,3 +1,4 @@
 flask_mysql/first_flask_mysql/password.py
 flask_mysql/crud/users_crud/password.py
 flask_mysql/crud/password.py
+flask_mysql/password.py

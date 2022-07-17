@@ -1,31 +1,33 @@
 # a cursor is the object we use to interact with the database
 import pymysql.cursors
-# import sys
-# sys.path.append("/Users/mouradmarzouk/python/flask_mysql")
-from password import password
+
+
 # this class will give us an instance of a connection to our database
 class MySQLConnection:
     def __init__(self, db):
-        connection = pymysql.connect(host = 'localhost',user = 'root', 
-                                    password = password, 
+        connection = pymysql.connect(host = 'localhost',
+                                    user = 'root', # change the user and password as needed
+                                    password = 'rootroot', 
                                     db = db,
                                     charset = 'utf8mb4',
-                                    cursorclass = pymysql.cursors.DictCursor, autocommit = True)
+                                    cursorclass = pymysql.cursors.DictCursor,
+                                    autocommit = True)
         # establish the connection to the database
         self.connection = connection
+
     # the method to query the database
     def query_db(self, query, data=None):
         with self.connection.cursor() as cursor:
             try:
                 query = cursor.mogrify(query, data)
                 print("Running Query:", query)
-                cursor.execute(query, data)
-                # INSERT queries will return the ID NUMBER of the row inserted
+                executable = cursor.execute(query, data)
                 if query.lower().find("insert") >= 0:
+                    # INSERT queries will return the ID NUMBER of the row inserted
                     self.connection.commit()
                     return cursor.lastrowid
-                # SELECT queries will return the data from the database as a LIST OF DICTIONARIES
                 elif query.lower().find("select") >= 0:
+                    # SELECT queries will return the data from the database as a LIST OF DICTIONARIES
                     result = cursor.fetchall()
                     return result
                 else:
@@ -38,7 +40,7 @@ class MySQLConnection:
             finally:
                 # close the connection
                 self.connection.close() 
+
 # connectToMySQL receives the database we're using and uses it to create an instance of MySQLConnection
 def connectToMySQL(db):
     return MySQLConnection(db)
-

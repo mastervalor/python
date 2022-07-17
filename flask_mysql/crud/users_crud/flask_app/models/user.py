@@ -1,7 +1,6 @@
-from unittest import result
-from mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import connectToMySQL
 
-class users:
+class Users:
     def __init__(self, data):
         self.id = data['id']
         self.first_name = data['first_name']
@@ -9,6 +8,7 @@ class users:
         self.email = data['email']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        
     @classmethod
     def save(cls,data):
         query = "INSERT INTO users(first_name, last_name, email) VALUES ( %(fname)s, %(lname)s, %(email)s);"
