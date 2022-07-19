@@ -12,7 +12,7 @@ def input():
 
 @app.route("/user/create", methods=["POST"])
 def new():
-    new_id = users.save(request.form)
+    new_id = Users.save(request.form)
     return redirect(f'/user/show/{new_id}')
 
 @app.route("/user/update", methods=["POST"])
