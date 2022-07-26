@@ -2,12 +2,13 @@
 from flask_app import app
 from flask import render_template,redirect,request,session,flash
 from flask_app.models.burger import Burger
+from flask_app.models.restaurant import Restaurant
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", all_restaurants=Restaurant.get_all())
 
-@app.route('/create',methods=['POST'])
+@app.route('/create/burger',methods=['POST'])
 def create():
     data = {
         "name":request.form['name'],
@@ -17,9 +18,6 @@ def create():
     }
     Burger.save(data)
     return redirect('/burgers')
-
-
-
 
 @app.route('/burgers')
 def burgers():

@@ -298,3 +298,22 @@ def timeconvert(time):
         if time[:2] != "12":
             hour = time[:2]
     return f'{hour}{time[2:8]}'
+
+#create a function that returns whether the secondstring is a permutation of the first. 
+# For example, given ("mister", "stimer"), return true. given ("mister", "sister"), return false
+
+def match(first_word, second_word):
+    if len(first_word) != len(second_word):
+        return False
+    new_word = ''
+    for i in range(0,len(first_word)):
+        for j in range(0,len(second_word)):
+            if first_word[i] == second_word[j]:
+                new_word = new_word + second_word[j]
+                break
+    if len(new_word) == len(first_word):
+        return True
+    else:
+        return False
+
+print(match("mister", "stimer"))
