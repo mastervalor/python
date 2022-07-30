@@ -58,6 +58,7 @@ print(minMaxAvg([1,2,3,4]))
 from ast import Import
 from fileinput import close
 import math
+import string
 
 
 def heights(list):
@@ -317,3 +318,10 @@ def match(first_word, second_word):
         return False
 
 print(match("mister", "stimer"))
+
+#rotate String Create a standalone function that accepts a string and an integer, 
+# and rotates the characters in the string to the right by that amount. ex: given ("boris godunov",5) return "dunovBoris Go"
+
+def reverse(text, loop):
+    return text[len(text)-loop:] + text[:len(text)-loop]
+print(reverse("boris godunov", 5))

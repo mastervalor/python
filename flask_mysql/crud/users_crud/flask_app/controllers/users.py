@@ -1,6 +1,10 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 from flask_app.models.user import Users
 from flask_app import app
+
+@app.route('/')
+def default():
+    return redirect('/users')
 
 @app.route("/users")
 def index():
@@ -12,6 +16,14 @@ def input():
 
 @app.route("/user/create", methods=["POST"])
 def new():
+    if not Users.validate_user(request.form):
+        session['fname'] = request.form['fname']
+        session['lname'] = request.form['lname']
+        session['email'] = request.form['email']
+        return redirect ('/user/new')
+    session.pop('fname')
+    session.pop('lname')
+    session.pop('email')
     new_id = Users.save(request.form)
     return redirect(f'/user/show/{new_id}')
 

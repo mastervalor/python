@@ -1,4 +1,8 @@
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask import flash
+import re
+
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
 class Users:
     def __init__(self, data):
@@ -39,3 +43,20 @@ class Users:
         query = "DELETE FROM users WHERE id = %(id)s;"
         retults = connectToMySQL('users').query_db(query, user_id)
         print(retults)
+        
+    @staticmethod
+    def validate_user(user):
+        is_valid = True
+        if len(user['fname']) < 2:
+            flash("First name must be at least 2 characters.")
+            is_valid = False
+        if len(user['lname']) < 2:
+            flash("Last name must be at least 2 characters")
+            is_valid = False
+        if len(user['email']) < 2:
+            flash("Email is required")
+            is_valid = False
+        if not EMAIL_REGEX.match(user['email']):
+            flash("Invald email address")
+            is_valid = False
+        return is_valid
