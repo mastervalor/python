@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Edit cookie order</title>
+</head>
+<body>
+    <form action="/cookie/update" method="POST" class="col-6 mx-auto">
+        <div class="d-flex justify-content-between">
+            <h1>Change Order {{cookie.id}}</h1>
+            <input type="hidden" name="id" value={{cookie.id}}>
+            <a href="/cookies">Back to purchases</a>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        </div>
+        <div class="form-group">
+            <label for="name">Name: </label>
+            {% if not session['name'] %}
+                <input type="text" value="{{cookie.customer_name}}" name="name" class="form-control">
+            {% else %}
+                <input type="text" value="{{session['name']}}" name="name" class="form-control">
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="cookie">Cookie Type: </label>
+            {% if not session['cookie'] %}
+                <input type="text" value="{{cookie.cookie_type}}" name="cookie" class="form-control">
+            {% else %}
+                <input type="text" value="{{session['cookie']}}" name="name" class="form-control">
+            {% endif %}
+        </div>
+            <div class="form-group">
+            <label for="boxes">Number of boxes: </label>
+            {% if not session['boxes'] %}
+                <input type="number" value="{{cookie.box_count}}" name="boxes" class="form-control">
+            {% else %}
+                <input type="number" value="{{session['boxes']}}" name="boxes" class="form-control">
+            {% endif %}
+        </div>
+            <input type="submit" value="Log" class="btn btn-success">
+    </form>
+</body>
+</html>
