@@ -15,7 +15,7 @@ class Users:
         
     @classmethod
     def save(cls,data):
-        query = "INSERT INTO users(first_name, last_name, email) VALUES ( %(fname)s, %(lname)s, %(email)s);"
+        query = "INSERT INTO users(first_name, last_name, email, password) VALUES ( %(fname)s, %(lname)s, %(email)s, %(password)S);"
         return connectToMySQL('users').query_db( query, data)
     
     @classmethod
@@ -43,6 +43,15 @@ class Users:
         query = "DELETE FROM users WHERE id = %(id)s;"
         retults = connectToMySQL('users').query_db(query, user_id)
         print(retults)
+    
+    @classmethod
+    def get_by_email(cls,data):
+        query = "SELECT * FROM users WHERE email = %(email)s;"
+        result = connectToMySQL("users").query_db(query,data)
+        # Didn't find a matching user
+        if len(result) < 1:
+            return False
+        return cls(result[0])
         
     @staticmethod
     def validate_user(user):

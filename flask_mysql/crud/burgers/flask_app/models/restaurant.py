@@ -18,7 +18,7 @@ class Restaurant:
     
     @classmethod
     def get_restaurant_with_burgers(cls, data):
-        query = "select * from left join burgers on burgers.restaurant_id = restaurants.id WHERE restaurants.id = %(id)s;"
+        query = "select * from restaurants left join burgers on burgers.restaurant_id = restaurants.id WHERE restaurants.id = %(id)s;"
         results = connectToMySQL('restaurants').query_db(query, data)
         # results will be a list of topping objects with the burger attached to each row
         restaurant = cls(results[0])
