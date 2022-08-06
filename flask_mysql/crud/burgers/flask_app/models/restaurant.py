@@ -30,7 +30,7 @@ class Restaurant:
                 "bun" : row_from_db["bun"],
                 "meat" : row_from_db["meat"],
                 "calories" : row_from_db["calories"],
-                "created_at" : row_from_db["burgers..created_at"],
+                "created_at" : row_from_db["burgers.created_at"],
                 "updated_at" : row_from_db["burgers.updated_at"]
             }
             restaurant.burgers.append(burger.Burger(burger_data))
