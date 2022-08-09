@@ -25,7 +25,6 @@ class Authors:
     def get_one_author(cls, data):
         query = "SELECT * from authors left join favorites on favorites.author_id = authors.id left join books on favorites.book_id = books.id where authors.id = %(id)s;"
         results = connectToMySQL('books_schema').query_db(query, data)
-        print(results)
         author = cls(results[0])
         for row in results:
             book_data = {

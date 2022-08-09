@@ -14,7 +14,8 @@ def authors():
 
 @app.route('/author/create', methods=['POST'])
 def create_author():
-    Authors.save_authors(request.form)
+    new_id = Authors.save_authors(request.form)
+    print(new_id)
     return redirect('/authors')
 
 @app.route('/authors/<int:author_id>')
