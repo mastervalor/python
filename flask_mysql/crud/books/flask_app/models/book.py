@@ -26,7 +26,6 @@ class Books:
     def get_books_favorites(cls, data):
         query = "SELECT * from books left join favorites on favorites.book_id = books.id left join authors on favorites.author_id = authors.id where books.id = %(id)s;"
         results = connectToMySQL('books_schema').query_db(query, data)
-        print(results)
         book = cls(results[0])
         for row in results:
             author_data = {
