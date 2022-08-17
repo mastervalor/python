@@ -30,7 +30,7 @@ def edit_recipe(id):
 @app.route('/recipe/change/<int:id>', methods=["POST"])
 def change_recipe(id):
     if not Recipes.validate_recipe(request.form):
-        return redirect(f'/recipe/new/{id}')
+        return redirect(f'/recipe/change/{id}')
     data = {
         'id': id,
         'name': request.form['name'],

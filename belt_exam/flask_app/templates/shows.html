@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>All Shows</title>
+</head>
+<body>
+    <h1>Welcome {{user.first_name}}!!!</h1>
+    <div class="d-flex justify-content-between align-items-center py-2 px-5">
+        <h6>All TV Shows:</h6>
+        <a href="/show/new" class="btn btn-info">Create new show</a>
+        <a href="/logout" class="btn btn-info">Logout</a>
+    </div>
+    <main>
+        <table class = "table table-striped table-bordered">
+            <thead class="bg-secondary p-2 bg-opacity-50">
+                <tr>
+                    <th>Title</th>
+                    <th>Network</th>
+                    <th>Release date</th>
+                    <th>Actions</th>
+                    <th>Likes!</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for show in shows %}
+                    <tr>
+                        <th>{{show.title}}</th>
+                        <th>{{show.network}}</th>
+                        <th>{{show.release_date}}</th>
+                        <th><a href="/show/view/{{show.id}}">show</a>  
+                            {% if show.poster_id == session['user_id'] %}
+                            | <a href="/show/edit/{{show.id}}">Edit</a> | <a href="/show/delete/{{show.id}}">Delete</a>
+                            {% endif %}
+                        </th>
+                        <th>
+                            {% if show.poster_id != session['user_id'] %}
+                                {% for unlike in unliked %}
+                                    {% if show.id == unlike.id %}
+                                        <a href="/show/like/{{show.id}}">Like!</a>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for like in liked %}
+                                    {% if show.id == like.id %}
+                                        <a href="/show/unlike/{{show.id}}">UnLike!</a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
