@@ -325,3 +325,42 @@ print(match("mister", "stimer"))
 def reverse(text, loop):
     return text[len(text)-loop:] + text[:len(text)-loop]
 print(reverse("boris godunov", 5))
+
+# given a string of roman numerals ("VII") convert those roman numerals to their corresponding numerical value (7)
+#   # I = 1 , V = 5, X = 10, L = 50, C = 100, IV = 4, XL = 40
+# Bonus: number to Roaman Numerals
+
+def roman(string):
+    numerals = { 'I': 1, 'V' : 5, 'X': 10, 'L': 50, 'C': 100}
+    total = 0
+    last_value = 0
+    for x in string.upper():
+        if last_value < numerals[x]:
+            total += numerals[x]
+            total -= last_value * 2
+            last_value = numerals[x]
+        else:
+            total += numerals[x]
+            last_value = numerals[x]
+    return total
+
+print(roman('LIV'))
+
+def roman_numerals(string):
+    roman_num = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+        }
+    sum = 0
+    for a in range(len(string) - 1):
+            if roman_num[string[a]] < roman_num[string[a + 1]]:
+                sum -= roman_num[string[a]]
+            else:
+                sum+=roman_num[string[a]]
+    sum+= roman_num[string[len(string)-1]]
+    return sum
+print(roman_numerals('CXLVIII'))
+print(roman_numerals('IV'))
